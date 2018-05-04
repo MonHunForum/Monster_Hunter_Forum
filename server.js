@@ -238,10 +238,18 @@ app.post('/postResult', urlencodedParser, (request, response) => {
       });
 });
 
+/**
+ * hbs page for making a quick reply to a thread
+ */
 app.get('/newPost', (request, response) => {
   response.render('createPost.hbs', { link: response.req.headers.referer.split('/')[3]});
 });
 
+/**
+ * Retrieves user submitted data for a new post
+ * Puts data into the Amazon database
+ * Redirects back to parent thread when done
+ */
 app.post('/newPostResult', urlencodedParser, (request, response) => {
   var link = request.body.link.split('=');
   var currentUser = request.body.currentUser;
@@ -254,10 +262,17 @@ app.post('/newPostResult', urlencodedParser, (request, response) => {
   });
 });
 
+/**
+ * hbs page for registering a new account
+ */
 app.get('/register', (request, response) => {
     response.render('register.hbs', {})
 });
 
+/**
+ * Retrieves the user submitted to process a new account
+ * Checks username for existing users to prevent duplicates
+ */
 app.post('/postReg', urlencodedParser, (request, response) => {
   var dupe_comment;
   var brower_flag = 0;
@@ -296,13 +311,6 @@ app.post('/postReg', urlencodedParser, (request, response) => {
  * Processes the name of the thread to be used as the url extension of
  * the webpage
  */
-// app.get('/testingstuff', (req, res) => {
-//   res.json('yes')
-// })
-
-// app.get('/verifyTest', (req, res) => {
-//   res.render('testpage.hbs', {})
-// })
 app.param('name', (request, response, next, name) => {
   var topic_title = name.split('=');
   request.name = topic_title;
@@ -314,20 +322,11 @@ app.param('name', (request, response, next, name) => {
 /**
  * Creates a webpage based on the title of the thread
  */
-
-
-//NOTE: post_sheet has other data on it that can be used to show posts.
-//      only username and post is used so far.
-//      refer to loadPosts() in google-sheets-functions.js
-
 app.get('/:name', (request, response) => {
   db.loadPosts(Number(request.name[0])).then((post_list) => {
     response.render('discussion_thread.hbs', {
       topic: request.name[1],
       posts: post_list});
-    // TODO: create function to update view count
-    // redir_page = response.req.url;
-    // database.updatePostView(current_sheet);
   }).catch((error) => {
     response.send(error);
   });
