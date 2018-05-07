@@ -92,6 +92,18 @@
   margin: auto;
 }
 
+#logout_but {
+  position: absolute;
+  font-family: 'Cinzel Decorative', cursive;
+  background-color: darkslategrey;
+  color: white;
+  width: 80px;
+  height: 5vh;
+  border-style: solid;
+  border-color: grey;
+  left: 30%;
+}
+
 /* banner */
 
 #banner {
