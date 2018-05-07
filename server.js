@@ -326,13 +326,14 @@ app.post('/postReg', urlencodedParser, (request, response) => {
  * Processes the name of the thread to be used as the url extension of
  * the webpage
  */
-app.param('name', (request, response, next, name) => {
-  var topic_title = name.split('=');
-  request.name = topic_title;
-  db.updateView(topic_title[0]);
-  next();
-});
-
+setTimeout(() => {
+  app.param('name', (request, response, next, name) => {
+    var topic_title = name.split('=');
+    request.name = topic_title;
+    db.updateView(topic_title[0]);
+    next();
+  });
+}, 1000);
 
 /**
  * Creates a webpage based on the title of the thread
