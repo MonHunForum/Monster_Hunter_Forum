@@ -333,7 +333,7 @@ setTimeout(() => {
     db.updateView(topic_title[0]);
     next();
   });
-}, 1000);
+}, 500);
 
 /**
  * Creates a webpage based on the title of the thread
@@ -341,7 +341,7 @@ setTimeout(() => {
 app.get('/:name', (request, response) => {
   db.loadPosts(Number(request.name[0])).then((post_list) => {
     response.render('discussion_thread.hbs', {
-      topic: request.name[1],
+      topic: request.name[1].replace(/_/g, " "),
       posts: post_list});
     // redir_page = response.req.url;
   }).catch((error) => {
