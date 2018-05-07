@@ -1,4 +1,4 @@
-// This is a database test for the forum
+// ** DEPRECATED **
 
 // Importing Google Spreadheet API
 // https://www.npmjs.com/package/google-spreadsheet

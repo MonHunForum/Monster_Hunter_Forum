@@ -220,10 +220,18 @@ app.post('/postResult', urlencodedParser, (request, response) => {
     });
 });
 
+/**
+ * hbs page for making a quick reply to a thread
+ */
 app.get('/newPost', (request, response) => {
     response.render('createPost.hbs', {})
 });
 
+/**
+ * Retrieves user submitted data for a new post
+ * Puts data into the Amazon database
+ * Redirects back to parent thread when done
+ */
 app.post('/newPostResult', urlencodedParser, (request, response) => {
   var datetime = new Date();
   database.addNewPost(current_user, datetime, request.body.topContent, current_sheet).then((result) => {
@@ -234,10 +242,17 @@ app.post('/newPostResult', urlencodedParser, (request, response) => {
   });
 })
 
+/**
+ * hbs page for registering a new account
+ */
 app.get('/register', (request, response) => {
     response.render('register.hbs', {})
 });
 
+/**
+ * Retrieves the user submitted to process a new account
+ * Checks username for existing users to prevent duplicates
+ */
 app.post('/postReg', urlencodedParser, (request, response) => {
   var dupe_comment;
   db.usernameExist(request.body.new_user).then((results) => {
@@ -275,6 +290,11 @@ app.post('/postReg', urlencodedParser, (request, response) => {
   })
 });
 
+
+/**
+ * Processes the name of the thread to be used as the url extension of
+ * the webpage
+ */
 app.param('name', (request, response, next, name) => {
   var topic_title = name.split('=');
   request.name = topic_title;
@@ -283,9 +303,9 @@ app.param('name', (request, response, next, name) => {
 });
 
 
-//NOTE: post_sheet has other data on it that can be used to show posts.
-//      only username and post is used so far.
-//      refer to loadPosts() in google-sheets-functions.js
+/**
+ * Creates a webpage based on the title of the thread
+ */
 app.get('/:name', (request, response) => {
   db.loadPosts(Number(request.name[0])).then((post_list) => {
     response.render('discussion_thread.hbs', {

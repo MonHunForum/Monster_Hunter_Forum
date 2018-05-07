@@ -114,25 +114,6 @@ var createPost = (post_id, thread_id, username, datetime, post) => {
 }
 
 /**
- * Increments the most recent thread number for use
- * in the next new thread.
- */
-var getNextThreadID = () => {
-  return new Promise((resolve, reject) => {
-    pool.getConnection((err, connection) => {
-      // Use the connection
-      connection.query(`SELECT thread_id FROM monster_hunter_forum_DB.Threads ORDER BY thread_id DESC LIMIT 1;`, (error, results, fields) => {
-        // And done with the connection.
-        connection.release();
-        // Handle error after the release.
-        if (error) reject(error);
-        else resolve(results[0].thread_id + 1);
-      });
-    });
-  });
-}
-
-/**
  * Thread ID to be used to determine which thread will be posted in
  * @param {number} thread_id - The unique thread number
  */
@@ -211,12 +192,16 @@ var regUser = (username, password) => {
   });
 }
 
+/**
+ * Obtains the thread ID of the currently clicked post
+ * @param {number} thread_id the thread id of the thread being posted to
+ */
 var updateView = (thread_id) => {
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {
       connection.query(`UPDATE monster_hunter_forum_DB.Threads SET views = views + 1 WHERE thread_id=${Number(thread_id)};`)
-    })
-  })
+    });
+  });
 }
 
 module.exports = {
@@ -224,7 +209,6 @@ module.exports = {
   loadPosts,
   createThread,
   createPost,
-  getNextThreadID,
   getNextPostID,
   loadUsers,
   usernameExist,
