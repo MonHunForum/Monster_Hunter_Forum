@@ -24,7 +24,7 @@ const port = process.env.PORT || 8080;
 // Importing file to access the Amazon database
 const db = require('./models/amazon_db.js');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const user_db = require('./models/classes/users.js')
+const user_db = require('./models/classes/users.js');
 
 // ** DEPRECATED **
 // const database = require('./public/js/google-sheets-functions.js');
@@ -325,9 +325,7 @@ app.get('/:name', (request, response) => {
     response.render('discussion_thread.hbs', {
       topic: request.name[1],
       posts: post_list});
-    // TODO: create function to update view count
     // redir_page = response.req.url;
-    // database.updatePostView(current_sheet);
   }).catch((error) => {
     response.send(error);
   });
