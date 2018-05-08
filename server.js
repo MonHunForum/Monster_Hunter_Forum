@@ -102,6 +102,9 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
 });
 
+app.get('/404', (req, res) => {
+  res.render('error_page.hbs');
+});
 
 // Redirecting '/' to Home Page
 app.get('/', (request, response) => {
@@ -148,18 +151,19 @@ app.post('/welcome', urlencodedParser, (request, response) => {
       }
   }).catch((error) => {
     response.send(error);
+    response.redirect('/404');
   });
 });
 
 // login cred check
 app.get('/relog', (request, response) => {
-  response.render('relogin.hbs')
+  response.render('relogin.hbs');
 });
 
 app.post('/checkCred', urlencodedParser, (request, response) => {
     db.loadUsers(request.body.user, request.body.pass).then((results) => {
       var username = request.body.user
-      console.log(username)
+      console.log(results)
       if ((results.length > 0) && (user_index(username) == null)) {
           users_list.push(new user_db.User(username))
           
@@ -192,6 +196,7 @@ app.post('/checkCred', urlencodedParser, (request, response) => {
 
     }).catch((error) => {
       console.log(error);
+      response.redirect('/404');
     });
 });
 
@@ -235,7 +240,7 @@ app.post('/postResult', urlencodedParser, (request, response) => {
           console.log(result);
           return db.getNextThreadID();
         } else if (result == false) {
-          throw error;
+          throw (err);
         }
       }).then((thread_id) => {
         console.log(thread_id);
@@ -255,6 +260,7 @@ app.post('/postResult', urlencodedParser, (request, response) => {
         // Will also stop any functions after it
       }).catch((error) => {
         console.log(error);
+        response.redirect('/404');
       });
 });
 
@@ -278,7 +284,8 @@ app.post('/newPostResult', urlencodedParser, (request, response) => {
   }).then((result) => {
     response.redirect(`/${request.body.link}`);
   }).catch((error) => {
-    response.send(error);
+    console.log(error);
+    response.redirect('/404');
   });
 });
 
@@ -322,7 +329,7 @@ app.post('/postReg', urlencodedParser, (request, response) => {
     }
   }).catch((error) => {
       console.log(error);
-      process.exit();
+      response.redirect('/404');
   })
 });
 
@@ -345,12 +352,17 @@ setTimeout(() => {
  */
 app.get('/:name', (request, response) => {
   db.loadPosts(Number(request.name[0])).then((post_list) => {
-    response.render('discussion_thread.hbs', {
-      topic: request.name[1].replace(/_/g, " "),
-      posts: post_list});
-    // redir_page = response.req.url;
+    if (post_list.length > 0) {
+      response.render('discussion_thread.hbs', {
+        topic: request.name[1].replace(/_/g, " "),
+        posts: post_list
+      });
+    } else {
+      throw (err);
+    }
   }).catch((error) => {
-    response.send(error);
+    console.log(error);
+    response.redirect('/404');
   });
 });
 
