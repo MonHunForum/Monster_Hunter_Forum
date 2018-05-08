@@ -235,7 +235,7 @@ app.post('/postResult', urlencodedParser, (request, response) => {
           console.log(result);
           return db.getNextThreadID();
         } else if (result == false) {
-          throw error;
+          throw (err);
         }
       }).then((thread_id) => {
         console.log(thread_id);
