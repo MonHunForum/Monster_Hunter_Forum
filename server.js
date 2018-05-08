@@ -115,6 +115,11 @@ app.get('/login', (request, response) => {
 app.get('/home', (request, response) => {
   response.redirect('/login');
 })
+
+app.get('/homepage', (request, response) => {
+  get_banner(0)
+  response.render('Homepage.hbs');
+})
 // rendering home page.
 // refer to google-sheets-functions.js for .loadPosts()
 app.post('/welcome', urlencodedParser, (request, response) => {
