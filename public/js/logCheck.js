@@ -11,5 +11,8 @@ setTimeout (() => {
     console.log(check)
     document.getElementById('logger').value = check;
     document.getElementById('userNow').value = currentUser;
-    document.getElementById('checkForm').submit();
+    setTimeout (() => {
+        console.log('timing test')
+        document.getElementById('checkForm').submit();
+    }, 200)
 }, 200)
