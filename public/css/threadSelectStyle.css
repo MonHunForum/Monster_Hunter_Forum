@@ -481,6 +481,7 @@ pre {
   background-repeat: no-repeat;
   width: 1.5%;
   height: 5%;
+  opacity:0;
 }
 
 #pass_checkmark {
@@ -492,6 +493,7 @@ pre {
   background-repeat: no-repeat;
   width: 1.5%;
   height: 5%;
+  opacity:0;
 }
 
 #conf_checkmark {
@@ -504,4 +506,5 @@ pre {
   width: 1.5%;
   height: 5%;
   left:-42px;
+  opacity:0;
 }
