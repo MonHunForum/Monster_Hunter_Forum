@@ -235,7 +235,7 @@ app.post('/postResult', urlencodedParser, (request, response) => {
           console.log(result);
           return db.getNextThreadID();
         } else if (result == false) {
-          throw error;
+          throw (err);
         }
       }).then((thread_id) => {
         console.log(thread_id);
@@ -353,7 +353,7 @@ app.get('/:name', (request, response) => {
         posts: post_list
       });
     } else {
-      throw error;
+      throw (err);
     }
   }).catch((error) => {
     console.log(error);
