@@ -71,17 +71,21 @@ var loadPosts = (thread_id) => {
  */
 var createThread = (thread_title) => {
   return new Promise((resolve, reject) => {
-    pool.getConnection((err, connection) => {
-      // Use the connection
-      connection.query(`INSERT INTO Threads (thread_title, views)
-      VALUES('${thread_title}', 0);`, (error, results, fields) => {
-        // And done with the connection.
-        connection.release();
-        // Handle error after the release.
-        if (error) reject(error);
-        else resolve(results);
+    if (thread_title != '' && thread_title != ' ') {
+      pool.getConnection((err, connection) => {
+        // Use the connection
+        connection.query(`INSERT INTO Threads (thread_title, views)
+        VALUES('${thread_title}', 0);`, (error, results, fields) => {
+          // And done with the connection.
+          connection.release();
+          // Handle error after the release.
+          if (error) reject(error);
+          else resolve(true);
+        });
       });
-    });
+    } else {
+      resolve(false);
+    };
   });
 }
 
@@ -207,12 +211,16 @@ var regUser = (username, password) => {
   });
 }
 
+/**
+ * Obtains the thread ID of the currently clicked post
+ * @param {number} thread_id the thread id of the thread being posted to
+ */
 var updateView = (thread_id) => {
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {
       connection.query(`UPDATE monster_hunter_forum_DB.Threads SET views = views + 1 WHERE thread_id=${Number(thread_id)};`)
-    })
-  })
+    });
+  });
 }
 
 module.exports = {

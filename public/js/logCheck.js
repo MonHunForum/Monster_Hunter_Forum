@@ -1,10 +1,15 @@
 var currentUser;
 
-currentUser = document.getElementById('currentUser').innerHTML
+for (var key in localStorage) {
+    if ((key != 'length')&&( key != 'key') && (key != 'getItem') && (key != 'setItem') && (key != 'clear') && (key != 'removeItem')) {
+        currentUser = key
+    }
+}
 
-console.log(currentUser)
-
-var check = localStorage.getItem(currentUser)
-
-document.getElementById('logger').value = check;
-document.getElementById('checkForm').submit();
+setTimeout (() => {
+    var check = localStorage.getItem(currentUser)
+    console.log(check)
+    document.getElementById('logger').value = check;
+    document.getElementById('userNow').value = currentUser;
+    document.getElementById('checkForm').submit();
+}, 100);

@@ -24,7 +24,7 @@ const port = process.env.PORT || 8080;
 // Importing file to access the Amazon database
 const db = require('./models/amazon_db.js');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const user_db = require('./models/classes/users.js')
+const user_db = require('./models/classes/users.js');
 
 // ** DEPRECATED **
 // const database = require('./public/js/google-sheets-functions.js');
@@ -120,7 +120,13 @@ app.get('/home', (request, response) => {
 app.post('/welcome', urlencodedParser, (request, response) => {
   db.loadThreads().then((post) => {
       if(request.body.loginCheck == 1) {
+        hbs.registerHelper('getUser', () => {
+          return request.body.userNow
+        });
         get_banner(1)
+        hbs.registerHelper('setLoginCheck', () => {
+          return 1
+        });
         response.render('index.hbs', {
           thread: post
         });
@@ -148,6 +154,7 @@ app.get('/relog', (request, response) => {
 app.post('/checkCred', urlencodedParser, (request, response) => {
     db.loadUsers(request.body.user, request.body.pass).then((results) => {
       var username = request.body.user
+      console.log(username)
       if ((results.length > 0) && (user_index(username) == null)) {
           users_list.push(new user_db.User(username))
           
@@ -191,15 +198,18 @@ app.post('/logOut', urlencodedParser, (request, response) => {
     });
 
     hbs.registerHelper('getUser', () => {
-      return request.body.currentUser
+      return request.body.username
     });
-    console.log(users_list)
+
     response.render('logOut.hbs', {})
 });
 
 // rendering post topic list page
-app.get('/postThread', (request, response) => {
-    response.render('postThread.hbs', {})
+app.post('/postThread', urlencodedParser, (request, response) => {
+  hbs.registerHelper('getUser', () => {
+    return request.body.username
+  });
+  response.render('postThread.hbs', {})
 });
 
 // posting thread to gs
@@ -215,14 +225,17 @@ app.post('/postResult', urlencodedParser, (request, response) => {
       // Function call format for creating a new thread
       // Threads have an initial post that accompany it on creation
       db.createThread(request.body.topTitle).then((result) => {
-        console.log('Adding new thread...');
-        console.log(result);
-        return db.getNextThreadID();
-      
+        if (result == true) {
+          console.log('Adding new thread...');
+          console.log(result);
+          return db.getNextThreadID();
+        } else if (result == false) {
+          throw error;
+        }
       }).then((thread_id) => {
         console.log(thread_id);
         tid = thread_id;
-        
+
         // Initial post
         return db.createPost(thread_id, 1, currentUser, request.body.topContent);
 
@@ -240,10 +253,18 @@ app.post('/postResult', urlencodedParser, (request, response) => {
       });
 });
 
+/**
+ * hbs page for making a quick reply to a thread
+ */
 app.get('/newPost', (request, response) => {
   response.render('createPost.hbs', { link: response.req.headers.referer.split('/')[3]});
 });
 
+/**
+ * Retrieves user submitted data for a new post
+ * Puts data into the Amazon database
+ * Redirects back to parent thread when done
+ */
 app.post('/newPostResult', urlencodedParser, (request, response) => {
   var link = request.body.link.split('=');
   var currentUser = request.body.currentUser;
@@ -256,10 +277,17 @@ app.post('/newPostResult', urlencodedParser, (request, response) => {
   });
 });
 
+/**
+ * hbs page for registering a new account
+ */
 app.get('/register', (request, response) => {
     response.render('register.hbs', {})
 });
 
+/**
+ * Retrieves the user submitted to process a new account
+ * Checks username for existing users to prevent duplicates
+ */
 app.post('/postReg', urlencodedParser, (request, response) => {
   var dupe_comment;
   var brower_flag = 0;
@@ -298,43 +326,24 @@ app.post('/postReg', urlencodedParser, (request, response) => {
  * Processes the name of the thread to be used as the url extension of
  * the webpage
  */
-app.get('/testingstuff', (req, res) => {
-  res.json('no')
-})
-
-app.get('/testing', (req, res) => {
-  res.render('testpage.hbs', {})
-})
-
-
-// app.get('/verifyTest', (req, res) => {
-//   res.render('testpage.hbs', {})
-// })
-app.param('name', (request, response, next, name) => {
-  var topic_title = name.split('=');
-  request.name = topic_title;
-  db.updateView(topic_title[0]);
-  next();
-});
-
+setTimeout(() => {
+  app.param('name', (request, response, next, name) => {
+    var topic_title = name.split('=');
+    request.name = topic_title;
+    db.updateView(topic_title[0]);
+    next();
+  });
+}, 500);
 
 /**
  * Creates a webpage based on the title of the thread
  */
-
-
-//NOTE: post_sheet has other data on it that can be used to show posts.
-//      only username and post is used so far.
-//      refer to loadPosts() in google-sheets-functions.js
-
 app.get('/:name', (request, response) => {
   db.loadPosts(Number(request.name[0])).then((post_list) => {
     response.render('discussion_thread.hbs', {
-      topic: request.name[1],
+      topic: request.name[1].replace(/_/g, " "),
       posts: post_list});
-    // TODO: create function to update view count
     // redir_page = response.req.url;
-    // database.updatePostView(current_sheet);
   }).catch((error) => {
     response.send(error);
   });
