@@ -354,7 +354,6 @@ a.threadTitle:hover, a.threadTitle:active {
   width: 10vw;
   display: inline-block;
   color: white;
-  border:2.2px solid darkseagreen;
   position: relative;
   bottom:-3px;
 }
@@ -364,7 +363,6 @@ a.threadTitle:hover, a.threadTitle:active {
   display: inline-block;
   color: white;
   position: relative;
-  border:2px solid darkseagreen;
   left:50%;
   bottom:43.5px;
   margin:auto;
