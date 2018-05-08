@@ -13,7 +13,7 @@
   top: 20vh;
   right: 0px;
   height: 5vh;
-  width: 90%;
+  width: 88%;
   margin: auto;
   position: fixed;
   z-index: 9998;
@@ -175,7 +175,7 @@
 #searchMenu {
   left: 1%;
   height: 5%;
-  width: 12%;
+  width: 10vw;
   position: fixed;
 }
 
@@ -205,6 +205,7 @@
   background-color: slategrey;
   font-size: 125%;
   font-size: 1.3vw;
+  width: 10vw;
 }
 
 #searchBox {
@@ -249,7 +250,7 @@
   background-color: #D3D3D4;
   border-color: grey;
   border-style: solid;
-  top: 17%;
+  top: -18.5%;
   position: fixed;
   z-index: 10000;
   border-radius: 25px;

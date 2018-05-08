@@ -8,11 +8,11 @@ var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
 menu.addEventListener("mouseover", function () {
-    quick_tab.style.top = '125px';
+    quick_tab.style.top = '18.5%';
 });
 
 close_but.addEventListener("click", function () {
-    quick_tab.style.top = '-100px';
+    quick_tab.style.top = '-18.5%';
 });
 
 mon_logo.addEventListener("mouseover", function () {
