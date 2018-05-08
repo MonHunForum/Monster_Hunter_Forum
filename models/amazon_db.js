@@ -24,14 +24,14 @@ var loadThreads = () => {
         var tempdb = {};
 
         for (var x in results) {
-          // if thread title not in tempdb, create entry with format "title": {id: int, etc}
-          if (!(results[x].thread_title in tempdb)) {
-            tempdb[`${results[x].thread_id}`] = { title: results[x].thread_title, views: results[x].views, replies: 0, started_by: results[x].username, post_date: results[x].post_date, last_poster: results[x].username, last_post_date: results[x].post_date, topic_link: results[x].thread_id+'='+results[x].thread_title.replace(/ /g,"_")};
-          } else {
-            // else if in tempdb, update last_poster, last_post_date, and replies
+          if (results[x].thread_id in tempdb) {
+            // if in tempdb, update last_poster, last_post_date, and replies
             tempdb[`${results[x].thread_id}`]['last_poster'] = results[x].username;
             tempdb[`${results[x].thread_id}`]['last_post_date'] = results[x].post_date;
             tempdb[`${results[x].thread_id}`]['replies'] += 1;
+          } else {
+            // if thread title not in tempdb, create entry with format "title": {id: int, etc}
+            tempdb[`${results[x].thread_id}`] = { title: results[x].thread_title, views: results[x].views, replies: 0, started_by: results[x].username, post_date: results[x].post_date, last_poster: results[x].username, last_post_date: results[x].post_date, topic_link: results[x].thread_id + '=' + results[x].thread_title.replace(/ /g, "_") };
           }
         }
         // And done with the connection.
