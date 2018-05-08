@@ -7,11 +7,12 @@
         {{> logBanner}}
     </div>
 
-    <form id="redirect" style="display: none;" action='/login' method='post'>
+    <form id="redirect" style="display: none;" action='/welcome' method='post'>
     </form>
 
     <script>
-        localStorage.removeItem(`{{getUser}}`);
+        console.log(document.getElementById('currentUser').innerHTML)
+        localStorage.removeItem(document.getElementById('currentUser').innerHTML);
         document.getElementById('redirect').submit();
     </script>
 </body>
