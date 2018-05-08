@@ -83,7 +83,7 @@ var checkConf = () => {
         conf_checkmark.style.backgroundImage = "url('/img/cross.png')";
         conf_checkmark.style.opacity = "1";
 
-    } else if (pass_value == 0 || conf_value.length == 0) {
+    } else if (conf_value.length == 0) {
         conf_error.innerHTML = ''
         conf_check = false
         conf_checkmark.style.backgroundImage = "url('/img/checkmark.png')";
