@@ -353,7 +353,7 @@ app.get('/:name', (request, response) => {
         posts: post_list
       });
     } else {
-      throw error;
+      throw (err);
     }
   }).catch((error) => {
     console.log(error);
