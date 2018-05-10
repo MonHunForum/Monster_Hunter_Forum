@@ -39,7 +39,7 @@
 }
 
 #loginInput {
-  top: 3%;
+  top: 0px;
   right: 5vw;
   height: inherit;
   width: 20vw;
@@ -189,11 +189,21 @@
   background-position: center;
 }
 
-#searchMenu {
+#forum_home {
   left: 1%;
-  height: 5%;
-  width: 12%;
-  position: fixed;
+  line-height: 165%;
+  height: 86%;
+  width: 10vw;
+  background-color: darkslategrey;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.3vw;
+  border-style: solid;
+  border-color: grey;
+  position: absolute;
+  font-family: 'Cinzel Decorative', cursive;
 }
 
 #forum_home:link, #forum_home:visited {
