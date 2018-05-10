@@ -120,7 +120,7 @@ app.get('/home', (request, response) => {
 })
 
 app.get('/homepage', (request, response) => {
-  get_banner(0)
+  get_banner(0);
   response.render('Homepage.hbs');
 })
 // rendering home page.

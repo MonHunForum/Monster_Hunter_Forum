@@ -337,33 +337,31 @@ a.threadTitle:hover, a.threadTitle:active {
 
 .topicBanner {
   width: 99.7%;
-  height: 2%;
+  height: 10%;
   margin: 0.2%;
   background-color: dimgrey;
   color: white;
   margin: 0.1%;
   display: inline-block;
+  position: relative;
 }
 
 .topicContainer {
-  width: 75%;
+  width: 49%;
   padding-left: 0.5%;
-  background-color: black;
   display: inline-block;
 }
 
 .statsContainer {
   width: 10%;
-  background-color: white;
   display: inline-block;
-  color: black
+  color: white;
 }
 
 .latestContainer {
-  width: 13.6%;
-  background-color: white;
+  width: 25.5%;
   display: inline-block;
-  color: black
+  color: white;
 }
 
 /* Topics Styling */
@@ -460,3 +458,4 @@ a.threadTitle:hover, a.threadTitle:active {
 #username, #password {
   height:70%;
 }
+
