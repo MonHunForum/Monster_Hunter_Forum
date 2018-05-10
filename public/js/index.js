@@ -7,6 +7,30 @@ var logout_but = document.getElementById('logout_but')
 var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
+logout_but.addEventListener("mouseover", function () {
+    document.getElementById('login_but').style.backgroundColor = 'slategrey';
+});
+
+logout_but.addEventListener("mouseout", function () {
+    document.getElementById('login_but').style.backgroundColor = 'darkslategrey';
+});
+
+loginBut.addEventListener("mouseover", function () {
+    document.getElementById('loginBut').style.backgroundColor = 'slategrey';
+});
+
+loginBut.addEventListener("mouseout", function () {
+    document.getElementById('loginBut').style.backgroundColor = 'darkslategrey';
+});
+
+reg_but.addEventListener("mouseover", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'slategrey';
+});
+
+reg_but.addEventListener("mouseout", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
+});
+
 menu.addEventListener("mouseover", function () {
     quick_tab.style.top = '17vh';
 });

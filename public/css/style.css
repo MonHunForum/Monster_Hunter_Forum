@@ -32,6 +32,12 @@
   font-size:15px;
 }
 
+#reg_but {
+  font-family: 'Cinzel Decorative', cursive;
+  background-color: darkslategrey;
+  color: white;
+}
+
 #loginInput {
     top: 3%; right: 5vw;
     height: inherit; width: 20vw;
@@ -41,11 +47,11 @@
   font-size: 2vh;
 }
 #logoutInput {
-    top: 30%; right: 2%;
-    position: absolute;
-    display: inline-block;
-    margin: auto;
-    font-size: 100%;
+  top: 0px; right: 5.2vw;
+  position: absolute;
+  display: inline-block;
+  margin: auto;
+  font-size: 100%;
 }
 
 #logout_but {
