@@ -8,11 +8,23 @@ var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
 menu.addEventListener("mouseover", function () {
-    quick_tab.style.top = '18.5%';
+    quick_tab.style.top = '17vh';
+});
+
+menu.addEventListener("mouseout", function () {
+    quick_tab.style.top = '-17vh';
+});
+
+quick_tab.addEventListener("mouseover", function () {
+    quick_tab.style.top = '17vh';
+});
+
+quick_tab.addEventListener("mouseout", function () {
+    quick_tab.style.top = '-17vh';
 });
 
 close_but.addEventListener("click", function () {
-    quick_tab.style.top = '-18.5%';
+    quick_tab.style.top = '-17vh';
 });
 
 mon_logo.addEventListener("mouseover", function () {

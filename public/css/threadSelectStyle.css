@@ -13,7 +13,7 @@
   top: 20vh;
   right: 0px;
   height: 5vh;
-  width: 90%;
+  width: 88%;
   margin: auto;
   position: fixed;
   z-index: 9998;
@@ -247,7 +247,7 @@
   background-color: #D3D3D4;
   border-color: grey;
   border-style: solid;
-  top: -18.5%;
+  top: -17vh;
   position: fixed;
   z-index: 10000;
   border-radius: 25px;
