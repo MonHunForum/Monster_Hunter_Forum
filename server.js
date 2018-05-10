@@ -60,14 +60,6 @@ hbs.registerPartials(__dirname + '/views/partials/homePartials');
 hbs.registerPartials(__dirname + '/views/partials/monhunPartials');
 hbs.registerPartials(__dirname + '/views/partials/communityPartials');
 
-/**
- * @param {string} current_user - current user flag
- * @param {number} login_flag - flags for login status will be removed later
- * @param {number} brower_flag - flags for browser status used for partial swaps
- * @param {string} dupe_comment - comment for error if dupe user detected when trying to register a new user
- * @param {string} current_sheet - sets the current google spreadsheet for thread link
- * @param {string} redir_page - sets varable for redirect after login
- */
 
 var users_list = [];
 
@@ -188,7 +180,7 @@ app.post('/welcome', urlencodedParser, (request, response) => {
         response.render('index.hbs', {
           thread: post
         });
-        console.log('loggged')
+
       } else if (request.body.loginCheck == '') {
         get_banner(0)
         response.render('index.hbs', {
