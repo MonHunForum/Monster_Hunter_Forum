@@ -1,8 +1,10 @@
+<div id='welcome'>
+    <strong id="welcomeMsg">
+        <i>Welcome Back {{getUser}}!</i>
+    </strong>
+</div>
+
 <div id='credentials'>
-    <div id='welcome'>
-        <strong id="welcomeMsg"><i>Welcome Back {{getUser}}!</i></strong>
-    </div>
-    
     <form id='logoutInput' action="/logOut" method="post">
         <button id="logout_but" type="submit" name='username' value={{getUser}}>Log Out</button>
     </form>

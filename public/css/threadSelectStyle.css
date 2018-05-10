@@ -20,15 +20,16 @@
 }
 
 #welcome {
-  top: -825%;
-  bottom: 0%;
-  height: 50%;
-  width: 50%;
+  top: 0px;
+  left: 0px;
+  height: 1vh;
+  width: 25vw;
   display: inline-block;
   position: absolute;
   margin: auto;
   color: white;
-  font-size: 100%;
+  font-size:15px;
+  z-index: 11000;
 }
 
 #reg_but {
@@ -312,7 +313,6 @@
 #monhun {
   padding: 1%;
   margin: 1%;
-  border: 1px solid black;
 }
 
 #thread_submit {
