@@ -7,12 +7,12 @@ var logout_but = document.getElementById('logout_but')
 var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
-reg_but.addEventListener("mouseover", function () {
-    document.getElementById('reg_but').style.backgroundColor = 'slategrey';
+mon_logo.addEventListener("mouseover", function () {
+    mon_logo.style.opacity = '0.6';
 });
 
-reg_but.addEventListener("mouseout", function () {
-    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
+mon_logo.addEventListener("mouseout", function () {
+    mon_logo.style.opacity = '1';
 });
 
 menu.addEventListener("mouseover", function () {
@@ -34,6 +34,21 @@ quick_tab.addEventListener("mouseout", function () {
 close_but.addEventListener("click", function () {
     quick_tab.style.top = '-17vh';
 });
+
+reg_but.addEventListener("mouseover", function () {
+    try {
+        document.getElementById('reg_but').style.backgroundColor = 'slategrey';
+    }
+    catch(err) {
+        //nope
+    }
+});
+
+reg_but.addEventListener("mouseout", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
+});
+
+
 
 mon_logo.addEventListener("mouseover", function () {
     mon_logo.style.opacity = '0.6';
