@@ -82,9 +82,6 @@ describe('testing login functionality', () => {
             expect(result.length).toBeFalsy
         });
     });
-<<<<<<< HEAD
-})
-=======
 });
 
 // describe('Login Input Test', () => {
@@ -97,4 +94,3 @@ describe('testing login functionality', () => {
 //         });
 //     });
 // });
->>>>>>> 4bb3deef5e775aa37f7cfff77c19712eeb42fca4
