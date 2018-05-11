@@ -366,6 +366,7 @@ a.threadTitle:hover, a.threadTitle:active {
   color: white;
   margin-bottom: 0.1%;
   display: inline-block;
+  position: relative;
 }
 
 .topicContainer {
@@ -503,3 +504,4 @@ a.threadTitle:hover, a.threadTitle:active {
 #username, #password {
   height:70%;
 }
+
