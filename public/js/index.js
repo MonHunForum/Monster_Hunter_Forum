@@ -15,6 +15,14 @@ mon_logo.addEventListener("mouseout", function () {
     mon_logo.style.opacity = '1';
 });
 
+reg_but.addEventListener("mouseover", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'slategrey';
+});
+
+reg_but.addEventListener("mouseout", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
+});
+
 menu.addEventListener("mouseover", function () {
     quick_tab.style.top = '17vh';
 });
