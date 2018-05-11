@@ -19,7 +19,7 @@ var loadThreads = () => {
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {
       // Use the connection
-      connection.query(`SELECT *, DATE_FORMAT(b.post_date, "%W %M %e, %Y %H:%i:%s") as post_date FROM monster_hunter_forum_DB.Threads as a JOIN monster_hunter_forum_DB.Posts as b ON a.thread_id=b.thread_id_fk;`, (error, results, fields) => {
+      connection.query(`SELECT *, DATE_FORMAT(b.post_date, "%W %M %e, %Y %H:%i") as post_date FROM monster_hunter_forum_DB.Threads as a JOIN monster_hunter_forum_DB.Posts as b ON a.thread_id=b.thread_id_fk;`, (error, results, fields) => {
         // process the result so its easier to pass to hbs
         var tempdb = {};
 
@@ -224,6 +224,24 @@ var updateView = (thread_id) => {
   });
 }
 
+
+// TDD verified function
+var testLogin = (username, password) => {
+  return new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      connection.query(`SELECT * FROM Users where username = '${username}' and password = '${password}';`, (error, results, fields) => {
+        connection.release();
+        if (results.length > 0) {
+          return true
+        } else {
+          return false
+        }
+      });
+    });
+  });
+}
+
+testLogin('stephen', 'abc123')
 module.exports = {
   loadThreads,
   loadPosts,
@@ -234,5 +252,6 @@ module.exports = {
   loadUsers,
   usernameExist,
   regUser,
-  updateView
+  updateView,
+  testLogin
 }
