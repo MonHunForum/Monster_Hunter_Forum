@@ -35,21 +35,6 @@ close_but.addEventListener("click", function () {
     quick_tab.style.top = '-17vh';
 });
 
-reg_but.addEventListener("mouseover", function () {
-    try {
-        document.getElementById('reg_but').style.backgroundColor = 'slategrey';
-    }
-    catch(err) {
-        //nope
-    }
-});
-
-reg_but.addEventListener("mouseout", function () {
-    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
-});
-
-
-
 mon_logo.addEventListener("mouseover", function () {
     mon_logo.style.opacity = '0.6';
 });
@@ -104,4 +89,16 @@ document.getElementById('close_but').addEventListener("mouseover", function () {
 
 document.getElementById('close_but').addEventListener("mouseout", function () {
     document.getElementById('close_but').style.backgroundColor = 'darkslategrey';
+});
+
+reg_but.addEventListener("mouseover", function () {
+    try {
+        document.getElementById('reg_but').style.backgroundColor = 'slategrey';
+    } catch (err) {
+        //nope
+    }
+});
+
+reg_but.addEventListener("mouseout", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
 });
