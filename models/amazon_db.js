@@ -224,6 +224,8 @@ var updateView = (thread_id) => {
   });
 }
 
+
+// TDD verified function
 var testLogin = (username, password) => {
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {
