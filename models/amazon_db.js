@@ -224,6 +224,8 @@ var updateView = (thread_id) => {
   });
 }
 
+//test comment
+
 module.exports = {
   loadThreads,
   loadPosts,
