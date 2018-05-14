@@ -274,7 +274,7 @@ app.post('/postResult', urlencodedParser, (request, response) => {
 
       // Function call format for creating a new thread
       // Threads have an initial post that accompany it on creation
-      db.createThread(request.body.topTitle).then((result) => {
+  db.createThread(request.body.topTitle.replace(/'/g, '\\\'').replace(/"/g, '\\\"')).then((result) => {
         if (result == true) {
           console.log('Adding new thread...');
           console.log(result);
@@ -287,7 +287,7 @@ app.post('/postResult', urlencodedParser, (request, response) => {
         tid = thread_id;
 
         // Initial post
-        return db.createPost(thread_id, 1, currentUser, request.body.topContent);
+        return db.createPost(thread_id, 1, currentUser, request.body.topContent.replace(/'/g, '\\\'').replace(/"/g, '\\\"'));
 
       }).then((result) => {
         console.log('Adding new post...');
@@ -320,7 +320,7 @@ app.post('/newPostResult', urlencodedParser, (request, response) => {
   var link = request.body.link.split('=');
   var currentUser = request.body.currentUser;
   db.getNextPostID(link[0]).then((result) => {
-    db.createPost(link[0], result, currentUser, request.body.topContent);
+    db.createPost(link[0], result, currentUser, request.body.topContent.replace(/'/g, '\\\'').replace(/"/g, '\\\"'));
   }).then((result) => {
     response.redirect(`/${request.body.link}`);
   }).catch((error) => {
@@ -391,28 +391,28 @@ setTimeout(() => {
  * Creates a webpage based on the title of the thread
  */
 app.get('/:name', (request, response) => {
-  db.loadPosts(Number(request.name[0])).then((post_list) => {
-    if (post_list.length > 0) {
-      response.render('discussion_thread.hbs', {
-        topic: request.name[1].replace(/_/g, " "),
-        posts: post_list
-      });
-    } else {
-      // Throw error when web page does not exist
-      throw new Error('Failed to get thread posts... maybe you are on welcome page');
-    }
-  }).catch((error) => {
-    // Log error and redirect to error page
-    console.log(error);
-    response.redirect('/404');
-  });
+  //usual request name has length of 1. only getting posts has length of 2
+  //if not opening thread posts, do nothing
+  if (request.name.length == 2) {
+    db.loadPosts(Number(request.name[0])).then((post_list) => {
+      if (request.name[1].replace(/_/g, ' ') == post_list[0].thread_title && post_list.length > 0) {
+        response.render('discussion_thread.hbs', {
+          topic: request.name[1].replace(/_/g, " "),
+          posts: post_list
+        });
+      } else {
+        // Throw error when web page does not exist
+        throw new Error('Page not found... redirecting to error page....');
+      }
+    }).catch((error) => {
+      // Log error and redirect to error page
+      console.log(error);
+      response.redirect('/404');
+    });
+  }
 });
 
 //****************************Server***************************************//
 app.listen(port, () => {
   console.log(`Server is up on http://localhost:${port}`);
 });
-
-db.loadUsers('anesbyc', 'uyjgh').then((result) => {
-  console.log(result);
-})
