@@ -22,15 +22,15 @@ reg_but.addEventListener("mouseout", function () {
 });
 
 menu.addEventListener("mouseover", function () {
-    quick_tab.style.top = '17vh';
+    quick_tab.style.top = '18vh';
 });
 
 menu.addEventListener("mouseout", function () {
     quick_tab.style.top = '-17vh';
-});
+}); 
 
 quick_tab.addEventListener("mouseover", function () {
-    quick_tab.style.top = '17vh';
+    quick_tab.style.top = '18vh';
 });
 
 quick_tab.addEventListener("mouseout", function () {
@@ -95,4 +95,12 @@ document.getElementById('close_but').addEventListener("mouseover", function () {
 
 document.getElementById('close_but').addEventListener("mouseout", function () {
     document.getElementById('close_but').style.backgroundColor = 'darkslategrey';
+});
+
+reg_but.addEventListener("mouseover", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'slategrey';
+});
+
+reg_but.addEventListener("mouseout", function () {
+    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
 });
