@@ -4,6 +4,7 @@ var mysql = require('mysql');
 var config = require('./json/secret.json');
 
 // Creates the connection to the database
+/* istanbul ignore next */
 var pool  = mysql.createPool({
   host: config.dbhost,
   user: config.dbuser,
@@ -17,8 +18,10 @@ var pool  = mysql.createPool({
  */
 var loadThreads = () => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`SELECT *, DATE_FORMAT(b.post_date, "%W %M %e, %Y %H:%i") as post_date FROM monster_hunter_forum_DB.Threads as a JOIN monster_hunter_forum_DB.Posts as b ON a.thread_id=b.thread_id_fk;`, (error, results, fields) => {
         // process the result so its easier to pass to hbs
         var tempdb = {};
@@ -35,6 +38,7 @@ var loadThreads = () => {
           }
         }
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -44,16 +48,21 @@ var loadThreads = () => {
   });
 }
 
+
+
 /**
  * Loads all posts from the database
  * Query can be adjusted to select posts for a specific thread
  */
 var loadPosts = (thread_id) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`SELECT *, DATE_FORMAT(b.post_date, "%a %b %e, %Y %H:%i:%s") as post_date FROM monster_hunter_forum_DB.Threads as a JOIN monster_hunter_forum_DB.Posts as b ON a.thread_id=b.thread_id_fk AND b.thread_id_fk=${thread_id};`, (error, results, fields) => {
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -72,11 +81,14 @@ var loadPosts = (thread_id) => {
 var createThread = (thread_title) => {
   return new Promise((resolve, reject) => {
     if (thread_title != '' && thread_title != ' ') {
+      /* istanbul ignore next */
       pool.getConnection((err, connection) => {
         // Use the connection
+        /* istanbul ignore next */
         connection.query(`INSERT INTO Threads (thread_title, views)
         VALUES('${thread_title}', 0);`, (error, results, fields) => {
           // And done with the connection.
+          /* istanbul ignore next */
           connection.release();
           // Handle error after the release.
           if (error) reject(error);
@@ -99,11 +111,14 @@ var createThread = (thread_title) => {
  */
 var createPost = (thread_id, post_id, username, post) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`INSERT INTO Posts (thread_id_fk, post_id, username, post_date, post) 
       VALUES(${thread_id}, ${post_id}, '${username}', NOW(), '${post}');`, (error, results, fields) => {
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -119,10 +134,13 @@ var createPost = (thread_id, post_id, username, post) => {
  */
 var getNextThreadID = () => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`SELECT thread_id FROM monster_hunter_forum_DB.Threads ORDER BY thread_id DESC LIMIT 1;`, (error, results, fields) => {
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -138,10 +156,13 @@ var getNextThreadID = () => {
  */
 var getNextPostID = (thread_id) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`SELECT post_id FROM monster_hunter_forum_DB.Posts WHERE thread_id_fk = ${thread_id} ORDER BY post_id DESC LIMIT 1;`, (error, results, fields) => {
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -158,10 +179,13 @@ var getNextPostID = (thread_id) => {
  */
 var loadUsers = (username, password) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`SELECT * FROM Users where username = '${username}' and password = '${password}';`, (error, results, fields) => {
-        // And done with the connection.
+        // And done with the connection.\
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -177,10 +201,13 @@ var loadUsers = (username, password) => {
  */
 var usernameExist = (username) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`SELECT * FROM Users where username = '${username}';`, (error, results, fields) => {
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -197,11 +224,14 @@ var usernameExist = (username) => {
  */
 var regUser = (username, password) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
       // Use the connection
+      /* istanbul ignore next */
       connection.query(`INSERT INTO Users (username, password)
       VALUES ('${username}', '${password}');`, (error, results, fields) => {
         // And done with the connection.
+        /* istanbul ignore next */
         connection.release();
         // Handle error after the release.
         if (error) reject(error);
@@ -217,15 +247,17 @@ var regUser = (username, password) => {
  */
 var updateView = (thread_id) => {
   return new Promise((resolve, reject) => {
+    /* istanbul ignore next */
     pool.getConnection((err, connection) => {
+      /* istanbul ignore next */
       connection.query(`UPDATE monster_hunter_forum_DB.Threads SET views = views + 1 WHERE thread_id=${Number(thread_id)};`)
+      /* istanbul ignore next */
       connection.release();
     });
   });
 }
 
-//test comment
-
+/* istanbul ignore next */
 module.exports = {
   loadThreads,
   loadPosts,
