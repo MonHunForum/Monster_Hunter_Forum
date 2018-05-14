@@ -69,21 +69,3 @@ var database = require('./amazon-db-test.js');
 //         });
 //     });
 // });
-
-describe('Login Input Test', () => {
-    test('User info is valid', () => {
-        database.loadUsers('anesbyc', 'O4rkWZCHGk').then((result) => {
-            expect(results.length).toBeGreaterThan(0);
-        });
-    });
-    test('User info is invalid', () => {
-        database.loadUsers('anesbyc', 'asdfsddfasd').then((result) => {
-            expect(results.length).toBe(0);
-        });
-    });
-    // test('Input is valid', () => {
-    //     database.createThread('stephe', 'abc234').then((result) => {
-    //         expect(result.length).toBeFalsy
-    //     });
-    // });
-});
