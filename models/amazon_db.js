@@ -225,7 +225,6 @@ var updateView = (thread_id) => {
 }
 
 
-testLogin('stephen', 'abc123')
 module.exports = {
   loadThreads,
   loadPosts,
