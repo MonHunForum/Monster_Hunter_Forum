@@ -7,6 +7,7 @@ var logout_but = document.getElementById('logout_but')
 var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
+<<<<<<< HEAD
 mon_logo.addEventListener("mouseover", function () {
     mon_logo.style.opacity = '0.6';
 });
@@ -18,10 +19,9 @@ mon_logo.addEventListener("mouseout", function () {
 reg_but.addEventListener("mouseover", function () {
     document.getElementById('reg_but').style.backgroundColor = 'slategrey';
 });
+=======
+>>>>>>> 8d25ed991d32883574850c425a42c837c18f468d
 
-reg_but.addEventListener("mouseout", function () {
-    document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
-});
 
 menu.addEventListener("mouseover", function () {
     quick_tab.style.top = '17vh';
