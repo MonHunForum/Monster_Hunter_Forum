@@ -7,6 +7,7 @@ var logout_but = document.getElementById('logout_but')
 var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
+
 menu.addEventListener("mouseover", function () {
     quick_tab.style.top = '18vh';
 });
