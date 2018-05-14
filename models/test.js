@@ -70,7 +70,6 @@ var database = require('./amazon-db-test.js');
 //     });
 // });
 
-<<<<<<< HEAD
 describe('Login Input Test', () => {
     test('User info is valid', () => {
         database.loadUsers('anesbyc', 'O4rkWZCHGk').then((result) => {
@@ -80,13 +79,6 @@ describe('Login Input Test', () => {
     test('User info is invalid', () => {
         database.loadUsers('anesbyc', 'asdfsddfasd').then((result) => {
             expect(results.length).toBe(0);
-=======
-
-describe('testing login functionality', () => {
-    test('Input is valid', () => {
-        database.testLogin('stephen', 'abc123').then((result) => {
-            expect(result).toBeTruthy
->>>>>>> 24f22ff6d92bd8f7e00e7e8111f380ba619ae795
         });
     });
     // test('Input is valid', () => {
