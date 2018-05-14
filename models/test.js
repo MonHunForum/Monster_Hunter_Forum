@@ -69,3 +69,27 @@ var database = require('./amazon-db-test.js');
 //         });
 //     });
 // });
+
+describe('testing login functionality', () => {
+    test('Input is valid', () => {
+        database.testLogin('stephen', 'abc123').then((result) => {
+            expect(result).toBeTruthy
+        });
+    });
+    // test('Input is valid', () => {
+    //     database.createThread('stephe', 'abc234').then((result) => {
+    //         expect(result.length).toBeFalsy
+    //     });
+    // });
+});
+
+// describe('Login Input Test', () => {
+//     test('User info is valid', () => {
+//         database.loadUsers('anesbyc', 'O4rkWZCHGk').then((result) => {
+//             for (var i=0;i < result.length; i++) {
+//                 expect(threads[i].username).toBe('username');
+//                 expect(threads[i].password).toBe('password');
+//             }
+//         });
+//     });
+// });

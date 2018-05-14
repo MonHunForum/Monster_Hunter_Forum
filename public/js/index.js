@@ -100,11 +100,7 @@ document.getElementById('close_but').addEventListener("mouseout", function () {
 });
 
 reg_but.addEventListener("mouseover", function () {
-    try {
-        document.getElementById('reg_but').style.backgroundColor = 'slategrey';
-    } catch (err) {
-        //nope
-    }
+    document.getElementById('reg_but').style.backgroundColor = 'slategrey';
 });
 
 reg_but.addEventListener("mouseout", function () {
