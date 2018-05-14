@@ -7,17 +7,16 @@ var logout_but = document.getElementById('logout_but')
 var loginBut = document.getElementById('loginBut')
 var reg_but = document.getElementById('reg_but')
 
-
 menu.addEventListener("mouseover", function () {
-    quick_tab.style.top = '17vh';
+    quick_tab.style.top = '18vh';
 });
 
 menu.addEventListener("mouseout", function () {
     quick_tab.style.top = '-17vh';
-});
+}); 
 
 quick_tab.addEventListener("mouseover", function () {
-    quick_tab.style.top = '17vh';
+    quick_tab.style.top = '18vh';
 });
 
 quick_tab.addEventListener("mouseout", function () {
