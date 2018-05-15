@@ -22,23 +22,19 @@ for (var key in localStorage) {
 // });
 
 menu.addEventListener("mouseover", function () {
-    quick_tab.style.top = '18vh';
+    quick_tab.style.top = '17%';
 });
 
 menu.addEventListener("mouseout", function () {
-    quick_tab.style.top = '-17vh';
+    quick_tab.style.top = '-17%';
 }); 
 
 quick_tab.addEventListener("mouseover", function () {
-    quick_tab.style.top = '18vh';
+    quick_tab.style.top = '17%';
 });
 
 quick_tab.addEventListener("mouseout", function () {
-    quick_tab.style.top = '-17vh';
-});
-
-close_but.addEventListener("click", function () {
-    quick_tab.style.top = '-17vh';
+    quick_tab.style.top = '-17%';
 });
 
 mon_logo.addEventListener("mouseover", function () {
