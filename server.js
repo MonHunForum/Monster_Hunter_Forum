@@ -83,6 +83,18 @@ var get_banner = (status) => {
   });
 }
 
+var threadsInCategory = (category_id, response) => {
+    db.loadThreads(category_id).then((threads) => {
+        get_banner(0)
+        response.render('index.hbs', {
+            thread: threads
+        });
+    }).catch((error) => {
+        response.send(error);
+        response.redirect('/404');
+    });
+}
+
 //*********************************Rendering*******************************//
 // Renders error page if an error occurs
 /**
@@ -140,6 +152,22 @@ app.get('/homepage', (request, response) => {
   response.render('Homepage.hbs');
 })
 
+app.get('/general', (request, response) => {
+    threadsInCategory(0, response);
+});
+
+app.get('/gameplay', (request, response) => {
+    threadsInCategory(1, response);
+});
+
+app.get('/FAQ', (request, response) => {
+    threadsInCategory(2, response);
+});
+
+app.get('/support', (request, response) => {
+    threadsInCategory(3, response);
+});
+
 /**
  * @param {string} '/welcome' - url for app.post action
  */
@@ -150,7 +178,7 @@ app.post('/welcome', urlencodedParser, (request, response) => {
    * @function db.loadThread - loads the threads from db to welcome page
    * @constant post - call back the posts
    */
-  db.loadThreads().then((post) => {
+  db.loadThreads(1).then((post) => {
     /**
      * @constant request.body.loginCheck - data sent back from client for checkin flag
      */
@@ -184,9 +212,7 @@ app.post('/welcome', urlencodedParser, (request, response) => {
         response.render('index.hbs', {
           thread: post
         });
-        console.log('out')
       } else {
-        console.log('neither')
         response.redirect('/login')
       }
   }).catch((error) => {
@@ -203,7 +229,6 @@ app.get('/relog', (request, response) => {
 app.post('/checkCred', urlencodedParser, (request, response) => {
     db.loadUsers(request.body.user, request.body.pass).then((results) => {
       var username = request.body.user
-      console.log(results)
       if ((results.length > 0) && (user_index(username) == null)) {
           users_list.push(new user_db.User(username))
           
