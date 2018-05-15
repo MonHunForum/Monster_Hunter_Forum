@@ -7,7 +7,7 @@
     right:0px;
     top:27%;
     margin:auto;
-    border:3px solid green;
+    border:3px solid grey;
     padding:5px;
     background-color: #d2d3d4;
 }
@@ -58,7 +58,7 @@
 #homebanner {
     left:3.3%;
     top:3.3%;
-    width:93.1%;
+    width:93.0%;
     background-color:black;
     color:white;
     text-align:center;
@@ -69,7 +69,11 @@
 
 #catetext {
     width:75%;
+<<<<<<< HEAD
     left:10%;
+=======
+    left:20%;
+>>>>>>> f33129d9a97e3297cfff31c28ba5bf090961c38b
     font-size:3vw;
     text-align:left;
     top:20%;

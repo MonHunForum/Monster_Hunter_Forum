@@ -83,6 +83,17 @@ var get_banner = (status) => {
   });
 }
 
+var threadsInCategory = (category_id, response) => {
+    db.loadThreads(category_id).then((threads) => {
+        response.render('index.hbs', {
+            thread: threads
+        });
+    }).catch((error) => {
+        response.send(error);
+        response.redirect('/404');
+    });
+}
+
 //*********************************Rendering*******************************//
 // Renders error page if an error occurs
 /**
@@ -126,19 +137,21 @@ app.get('/home', (request, response) => {
   response.redirect('/login');
 })
 
-/**
- * @param {string} '/homepage' - url for app.get
- */
-app.get('/homepage', (request, response) => {
-  /**
-   * @function get_banner - used to select banner for homepage.hbs
-   */
-  get_banner(0)
-  /**
-   * @param {string} 'Homepage.hbs' - .hbs file for rendering
-   */
-  response.render('Homepage.hbs');
-})
+app.get('/general', (request, response) => {
+    threadsInCategory(0, response);
+});
+
+app.get('/gameplay', (request, response) => {
+    threadsInCategory(1, response);
+});
+
+app.get('/off_topic', (request, response) => {
+    threadsInCategory(2, response);
+});
+
+app.get('/support', (request, response) => {
+    threadsInCategory(3, response);
+});
 
 /**
  * @param {string} '/welcome' - url for app.post action
@@ -150,7 +163,7 @@ app.post('/welcome', urlencodedParser, (request, response) => {
    * @function db.loadThread - loads the threads from db to welcome page
    * @constant post - call back the posts
    */
-  db.loadThreads().then((post) => {
+  db.loadThreads(1).then((post) => {
     /**
      * @constant request.body.loginCheck - data sent back from client for checkin flag
      */
@@ -175,13 +188,13 @@ app.post('/welcome', urlencodedParser, (request, response) => {
         /**
          * param {string} 'index.hbs' - .hbs for render
          */
-        response.render('index.hbs', {
+        response.render('Homepage.hbs', {
           thread: post
         });
 
       } else if (request.body.loginCheck == '') {
         get_banner(0)
-        response.render('index.hbs', {
+        response.render('Homepage.hbs', {
           thread: post
         });
       } else {
