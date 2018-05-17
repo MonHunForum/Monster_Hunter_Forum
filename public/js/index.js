@@ -13,7 +13,7 @@ var logout_but = document.getElementById('logout_but')
 
 // reg_but.addEventListener("mouseout", function () {
 //     document.getElementById('reg_but').style.backgroundColor = 'darkslategrey';
-// });
+// }); aa
 
 menu.addEventListener("mouseover", function () {
     quick_tab.style.top = '17%';
