@@ -87,7 +87,6 @@ var loadPosts = (thread_id) => {
 var createThread = (thread_title, cat_id) => {
   return new Promise((resolve, reject) => {
     if (thread_title != '' && thread_title != ' ') {
-<<<<<<< HEAD
       pool.getConnection((err, connection) => {
         // Use the connection
         connection.query(`INSERT INTO Threads (thread_title, views, category_id)
@@ -98,14 +97,6 @@ var createThread = (thread_title, cat_id) => {
           if (error) reject(error);
           else resolve(true);
         });
-=======
-      // Use the connection
-      pool.query(`INSERT INTO Threads (thread_title, views, category_id)
-        VALUES('${thread_title}', 0, ${cat_id});`, (error, results, fields) => {
-        // Handle error after the release.
-        if (error) reject(error);
-        else resolve(true);
->>>>>>> 59cc06c8e771add3da7c4f54d8074cf6f5e3c31a
       });
     } else {
       resolve(false);
