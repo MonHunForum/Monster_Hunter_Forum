@@ -1,9 +1,4 @@
-var db = require('./amazon-db-test.js');
 var database = require('./amazon_db.js');
-
-// TODO: Fix "ACCESS DENIED" error on travis-ci
-// Tests are setup properly however travis is unable 
-// to access database properly
 
 // describe('Thread tests from Amazon RDS database', async () => {
 //     test('thread properties', () => {
@@ -81,36 +76,20 @@ describe('Thread posting test', () => {
             console.log(error);
         });
     });
-    // test('Input is valid', () => {
-    //     database.createThread('Heya heya').then((result) => {
-    //         expect(result).toBeTruthy();
-    //     });
-    // });
 });
 
 
-describe('testing login functionality', () => {
-    test('Input is valid', () => {
-        db.testLogin('stephen', 'abc123').then((result) => {
-            expect(result).toBeTruthy();
-        }).catch((error) => {
-            console.log(error);
-        });
-    });
-    // test('Input is valid', () => {
-    //     database.createThread('stephe', 'abc234').then((result) => {
-    //         expect(result.length).toBeFalsy
-    //     });
-    // });
-});
-
-// describe('Login Input Test', () => {
-//     test('User info is valid', () => {
-//         database.loadUsers('anesbyc', 'O4rkWZCHGk').then((result) => {
-//             for (var i=0;i < result.length; i++) {
-//                 expect(threads[i].username).toBe('username');
-//                 expect(threads[i].password).toBe('password');
-//             }
+// describe('testing login functionality', () => {
+//     test('Input is valid', () => {
+//         database.loadUsers('stephen', 'abc123').then((result) => {
+//             expect(result).toBeTruthy();
+//         }).catch((error) => {
+//             console.log(error);
+//         });
+//     });
+//     test('Input is valid', () => {
+//         database.createThread('stephe', 'abc234').then((result) => {
+//             expect(results).toBeFalsy
 //         });
 //     });
 // });
