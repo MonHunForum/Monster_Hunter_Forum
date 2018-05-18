@@ -106,7 +106,6 @@ var createThread = (thread_title, cat_id) => {
           if (error) reject(error);
           else resolve(true);
         });
-      });
     } else {
       resolve(false);
     };
